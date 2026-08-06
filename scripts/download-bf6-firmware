@@ -15,7 +15,7 @@ if [ -f "$firmware_file" ] && printf '%s  %s\n' "$firmware_sha256" "$firmware_fi
 fi
 
 rm -f "$firmware_partial"
-gdown "$firmware_id" -O "$firmware_partial"
+python3 -m gdown "$firmware_id" -O "$firmware_partial"
 printf '%s  %s\n' "$firmware_sha256" "$firmware_partial" | sha256sum --check
 mv "$firmware_partial" "$firmware_file"
 printf '%s\n' "Firmware BF6 téléchargé et validé : $firmware_file"
