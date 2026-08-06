@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+
+firmware_id="11mo0jIW8xRZiJujJDRKCfPS6ODypVbsQ"
+firmware_sha256="a54e404d1d60dd1fd5883f182226c577488b9bf33727bd08d0d63f85fe3b6b79"
+firmware_dir="/tmp/josia-firmware"
+firmware_file="$firmware_dir/BF6-V866-firmware.zip"
+firmware_partial="$firmware_file.part"
+
+mkdir -p "$firmware_dir"
+
+if [ -f "$firmware_file" ] && printf '%s  %s\n' "$firmware_sha256" "$firmware_file" | sha256sum --check --status; then
+    printf '%s\n' "Firmware BF6 déjà présent et valide : $firmware_file"
+    exit 0
+fi
+
+rm -f "$firmware_partial"
+gdown "$firmware_id" -O "$firmware_partial"
+printf '%s  %s\n' "$firmware_sha256" "$firmware_partial" | sha256sum --check
+mv "$firmware_partial" "$firmware_file"
+printf '%s\n' "Firmware BF6 téléchargé et validé : $firmware_file"
