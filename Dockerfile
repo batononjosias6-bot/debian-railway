@@ -4,6 +4,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         android-sdk-libsparse-utils \
         attr \
+        binutils \
         brotli \
         ca-certificates \
         cpio \
@@ -18,6 +19,7 @@ RUN apt-get update && \
         p7zip-full \
         python3 \
         python3-pip \
+        ripgrep \
         rsync \
         unzip \
         wget \
